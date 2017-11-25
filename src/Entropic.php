@@ -38,6 +38,8 @@ class Entropic
         $opts .= "c::";
         $opts .= "l::";
         $opts .= "v";
+
+        // short options at the moment
         return getopt($opts);
     }
 
