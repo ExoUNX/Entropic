@@ -8,7 +8,6 @@ namespace ExoUNX\Entropic;
  */
 class Entropic
 {
-
     /**
      * Entropic constructor.
      * Gets arguments
@@ -24,8 +23,21 @@ class Entropic
      */
     public function genPassword(): string
     {
-        $options = "";
+        $options = $this->getOptions();
         return $this->setCharset($options);
+    }
+
+    /**
+     * @return array
+     * Get Arguments/Options
+     */
+    private function getOptions(): array
+    {
+        $opts = "";
+        $opts .= "gen::";
+        $opts .= "charset::";
+        $opts .= "length::";
+        return getopt($opts);
     }
 
     /**
@@ -33,10 +45,8 @@ class Entropic
      * @return string
      * Gets user options and sets charset accordingly
      */
-    private function setCharset(string $options): string
+    private function setCharset(array $options): string
     {
-        return $options;
+        return $options[''];
     }
-
-
 }
