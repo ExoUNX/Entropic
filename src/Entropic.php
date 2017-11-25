@@ -34,9 +34,10 @@ class Entropic
     private function getOptions(): array
     {
         $opts = "";
-        $opts .= "gen::";
-        $opts .= "charset::";
-        $opts .= "length::";
+        $opts .= "g::";
+        $opts .= "c::";
+        $opts .= "l::";
+        $opts .= "v";
         return getopt($opts);
     }
 
