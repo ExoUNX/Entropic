@@ -2,54 +2,60 @@
 
 namespace ExoUNX\Entropic;
 
+use GetOpt\GetOpt;
+use GetOpt\Option;
+
 /**
  * Class Entropic
  * @package ExoUNX\Entropic
  */
 class Entropic
 {
-    /**
-     * Entropic constructor.
-     * Gets arguments
-     */
-    public function __construct()
-    {
-
-    }
 
     /**
-     * @return string
      * Generates random bytes, converts to charset, and returns password
      */
-    public function genPassword(): string
+    public function genPassword(): void
     {
         $options = $this->getOptions();
-        return $this->setCharset($options);
+        var_dump($options);
     }
 
     /**
-     * @return array
-     * Get Arguments/Options
+     * Get Options
      */
-    private function getOptions(): array
+    private function getOptions()
     {
-        $opts = "";
-        $opts .= "g::";
-        $opts .= "c::";
-        $opts .= "l::";
-        $opts .= "v";
-
-        // short options at the moment
-        return getopt($opts);
+        return $this->setOptions()->process();
     }
 
     /**
-     * @param string $options
+     * Define Options
+     */
+    private function setOptions()
+    {
+        $setOpt = new GetOpt();
+        $setOpt->addOptions([
+            Option::create('V', 'version', GetOpt::NO_ARGUMENT)
+                ->setDescription('Show version'),
+
+            Option::create('?', 'help', GetOpt::NO_ARGUMENT)
+                ->setDescription('Show help'),
+
+            Option::create('g', 'gen', GetOpt::NO_ARGUMENT)
+                ->setDescription('Automatically generate a secure password (default length = 24)')
+        ]);
+
+        return $setOpt;
+    }
+
+    /**
+     * @param array $options
      * @return string
      * Gets user options and sets charset accordingly
      */
     private function setCharset(array $options): string
     {
-        return $options[''];
+        return $options['key1'] = "test";
     }
 }

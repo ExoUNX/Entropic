@@ -2,6 +2,7 @@
   "name": "exounx/entropic",
   "description": "Secure and easy random password generator",
   "license": "MIT",
+  "version": "0.0.1-a",
   "authors": [
     {
       "name": "Gaige Lama",
@@ -9,7 +10,8 @@
     }
   ],
   "require": {
-    "php": ">=7.1.0"
+    "php": ">=7.1.0",
+    "ulrichsg/getopt-php": "^3.0"
   },
   "autoload": {
     "psr-4": {
