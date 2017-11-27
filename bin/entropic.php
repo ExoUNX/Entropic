@@ -8,5 +8,7 @@ use ExoUNX\Entropic;
 
 $genpass = new Entropic\Entropic();
 
-$genpass->genPassword();
+
+echo $genpass->genPassword(20);
+
 
