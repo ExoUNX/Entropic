@@ -8,7 +8,10 @@ use ExoUNX\Entropic;
 
 $genpass = new Entropic\Entropic();
 
-
-echo $genpass->genPassword(20);
+try {
+    echo $genpass->genPassword(20);
+} catch (\Exception $e) {
+    echo $e->getMessage();
+}
 
 

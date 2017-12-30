@@ -10,8 +10,7 @@
     }
   ],
   "require": {
-    "php": ">=7.1.0",
-    "ulrichsg/getopt-php": "^3.0"
+    "php": ">=7.1.0"
   },
   "autoload": {
     "psr-4": {

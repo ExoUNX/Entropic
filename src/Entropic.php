@@ -2,11 +2,6 @@
 
 namespace ExoUNX\Entropic;
 
-use GetOpt\ArgumentException;
-use GetOpt\ArgumentException\Missing;
-use GetOpt\GetOpt;
-use GetOpt\Option;
-
 /**
  * Class Entropic
  * @package ExoUNX\Entropic
@@ -14,25 +9,43 @@ use GetOpt\Option;
 class Entropic
 {
 
-
     /**
      * @param $length
      * @return string
+     * @throws \Exception
      */
     public function genPassword(int $length): string
 
     {
-        return $this->generateRandomString($length);
+        if (empty($this->getOps())) {
+            return $this->generateRandomString($length);
+        } else {
+            return $this->generateRandomString($this->getOps());
+        }
+    }
+
+    private function getOps(): ?int
+    {
+        if (getopt("c")) {
+            return getopt("c")['c'];
+        } else {
+            return null;
+        }
     }
 
     /**
      * @param int $length
      * @return string
+     * @throws \Exception
      */
     private function generateRandomString(int $length): string
 
     {
-        return $this->translateBin($this->xorBytes(random_bytes($length), random_bytes($length)));
+        try {
+            return $this->translateBin(random_bytes($length));
+        } catch (\Exception $e) {
+            echo $e->getMessage();
+        }
     }
 
     /**
@@ -49,71 +62,5 @@ class Entropic
         }
 
         return $str;
-    }
-
-    /**
-     * @param $string
-     * @param $key
-     * @return string
-     */
-    private function xorBytes($string, $key): string
-    {
-        for ($i = 0; $i < strlen($string); $i++)
-            $string[$i] = ($string[$i] ^ $key[$i % strlen($key)]);
-        return $string;
-    }
-
-    /**
-     * Get Options
-     */
-    private function getOptions(): object
-    {
-        try {
-            try {
-                $this->setOptions()->process();
-
-            } catch (Missing $exception) {
-                // catch missing exceptions if help is requested
-                if (!$this->setOptions('help')) {
-                    throw $exception;
-                }
-            }
-        } catch (ArgumentException $exception) {
-            file_put_contents('php://stderr', $exception->getMessage() . PHP_EOL);
-            echo PHP_EOL . $this->setOptions()->getHelpText();
-            exit;
-        }
-        return $this->setOptions();
-    }
-
-    /**
-     * Define Options
-     */
-    private function setOptions(): object
-    {
-        $setOpt = new GetOpt();
-        $setOpt->addOptions([
-            Option::create('V', 'version', GetOpt::NO_ARGUMENT)
-                ->setDescription('Show version'),
-
-            Option::create('?', 'help', GetOpt::NO_ARGUMENT)
-                ->setDescription('Show help'),
-
-            Option::create('g', 'gen', GetOpt::NO_ARGUMENT)
-                ->setDescription('Automatically generate a secure password (default length = 20)')
-        ]);
-
-
-        return $setOpt;
-    }
-
-    /**
-     * @param array $options
-     * @return string
-     * Gets user options and sets charset accordingly
-     */
-    private function setCharset(array $options): string
-    {
-        return $options['key1'] = "test";
     }
 }
