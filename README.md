@@ -3,16 +3,6 @@ Secure and easy password generator
 
 ## Install
 
-``` json
-{
-    "require": {
-        "exounx/entropic": "~0.0.2"
-    }
-}
-```
-
-Or
-
 ```
 composer require exounx/entropic
 ```
