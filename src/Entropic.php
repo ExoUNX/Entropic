@@ -42,25 +42,27 @@ class Entropic
 
     {
         try {
-            return $this->translateBin(random_bytes($length));
+            return $this->translateBin($length);
         } catch (\Exception $e) {
             echo $e->getMessage();
         }
     }
 
     /**
-     * @param string $str
+     * @param int $length
      * @return string
+     * @throws \Exception
      */
-    private function translateBin(string $str): string
+    private function translateBin(int $length): string
     {
         $charset = array_merge(range('A', 'Z'), range('a', 'z'), range(0, 9), str_split("!@#$%^&*()-_=+,.?/:;{}[]'`~|\\\""));
-        $size = count($charset);
+        $size = count($charset) - 1;
 
-        for ($len = strlen($str), $i = 0; $i < $len; $i++) {
-            $str[$i] = $charset[ord($str[$i]) % $size];
+        for ($len = $length, $i = 0; $i < $len; $i++) {
+            $k = random_int(0, $size);
+            $str[$i] = $charset[$k];
         }
 
-        return $str;
+        return implode('', $str);
     }
 }
