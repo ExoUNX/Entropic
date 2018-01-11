@@ -39,30 +39,22 @@ class Entropic
      * @throws \Exception
      */
     private function generateRandomString(int $length): string
-
     {
-        try {
-            return $this->translateBin($length);
-        } catch (\Exception $e) {
-            echo $e->getMessage();
-        }
-    }
+        $str = null;
 
-    /**
-     * @param int $length
-     * @return string
-     * @throws \Exception
-     */
-    private function translateBin(int $length): string
-    {
-        $charset = array_merge(range('A', 'Z'), range('a', 'z'), range(0, 9), str_split("!@#$%^&*()-_=+,.?/:;{}[]'`~|\\\""));
-        $size = count($charset) - 1;
+        $size = count($this->defaultCharset()) - 1;
 
         for ($len = $length, $i = 0; $i < $len; $i++) {
             $k = random_int(0, $size);
-            $str[$i] = $charset[$k];
+            $str[$i] = $this->defaultCharset()[$k];
         }
 
         return implode('', $str);
+    }
+
+    private function defaultCharset(): array
+    {
+        return $charset = array_merge(range('A', 'Z'), range('a', 'z'), range(0, 9), str_split("!@#$%^&*()-_=+,.?/:;{}[]'`~|\\\""));
+
     }
 }
