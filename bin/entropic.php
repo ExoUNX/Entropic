@@ -9,7 +9,7 @@ use ExoUNX\Entropic;
 $genpass = new Entropic\Entropic();
 
 try {
-    echo $genpass->genPassword(20);
+    echo $genpass->genPassword(20) . hex2bin('0d0a');
 } catch (\Exception $e) {
     echo $e->getMessage();
 }
