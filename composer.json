@@ -2,7 +2,6 @@
   "name": "exounx/entropic",
   "description": "Secure and easy random password generator",
   "license": "MIT",
-  "version": "0.0.2",
   "authors": [
     {
       "name": "Gaige Lama",
