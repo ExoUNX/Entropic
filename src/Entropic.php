@@ -44,11 +44,13 @@ class Entropic
     {
         $str = null;
 
-        $size = count($this->defaultCharset()) - 1;
+        $default_charset = $this->defaultCharset();
+
+        $size = count($default_charset) - 1;
 
         for ($len = $length, $i = 0; $i < $len; $i++) {
             $k = random_int(0, $size);
-            $str[$i] = $this->defaultCharset()[$k];
+            $str[$i] = $default_charset[$k];
         }
 
         return implode('', $str);
