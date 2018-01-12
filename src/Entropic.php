@@ -58,7 +58,7 @@ class Entropic
 
     private function defaultCharset(): array
     {
-        $charset = str_split(hex2bin($this::DEFAULT_CHARSET));
+        $charset = str_split(hex2bin(self::DEFAULT_CHARSET));
         return $charset;
     }
 }
