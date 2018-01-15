@@ -1,3 +1,7 @@
+[![Build Status](https://scrutinizer-ci.com/g/ExoUNX/Entropic/badges/build.png?b=master)](https://scrutinizer-ci.com/g/ExoUNX/Entropic/build-status/master) 
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/ExoUNX/Entropic/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/ExoUNX/Entropic/?branch=master)
+![License](https://img.shields.io/github/license/ExoUNX/Entropic.svg)
+
 # Entropic
 Secure and easy password generator
 
