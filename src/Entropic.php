@@ -2,6 +2,8 @@
 
 namespace ExoUNX\Entropic;
 
+use Exception;
+
 /**
  * Class Entropic
  * @package ExoUNX\Entropic
@@ -20,21 +22,23 @@ class Entropic
 
     private const ASCII_NUMERICAL = "0123456789";
 
-    private const DEFAULT_CHARSET = self::ASCII_SYMBOL . self::ASCII_LOWERCASE . self::ASCII_UPPERCASE . self::ASCII_NUMERICAL;
+    private const DEFAULT_CHARSET = self::ASCII_SYMBOL.self::ASCII_LOWERCASE.self::ASCII_UPPERCASE.self::ASCII_NUMERICAL;
 
     /**
      * @param $length
+     *
      * @return string
-     * @throws \Exception
+     * @throws Exception
      */
     public function genPassword(int $length): string
-
     {
         if (empty($this->getOps())) {
-            return $this->generateRandomString($length);
+            $password = $this->generateRandomString($length);
         } else {
-            return $this->generateRandomString($this->getOps());
+            $password = $this->generateRandomString($this->getOps());
         }
+
+        return $password;
     }
 
     /**
@@ -51,9 +55,10 @@ class Entropic
     }
 
     /**
-     * @param int $length
+     * @param  int  $length
+     *
      * @return string
-     * @throws \Exception
+     * @throws Exception
      */
     private function generateRandomString(int $length): string
     {
@@ -64,7 +69,7 @@ class Entropic
         $size = count($default_charset) - 1;
 
         for ($len = $length, $i = 0; $i < $len; $i++) {
-            $k = random_int(0, $size);
+            $k       = random_int(0, $size);
             $str[$i] = $default_charset[$k];
         }
 
